@@ -38,6 +38,25 @@
             left: 0;
             cursor: move;
             z-index: 1000;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding-right: 10px;
+        }
+
+        #close-button {
+            width: 20px;
+            height: 20px;
+            background: #e74c3c;
+            border-radius: 50%;
+            cursor: pointer;
+            -webkit-app-region: no-drag;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            margin-right: 10px;
         }
 
         .content {
@@ -54,16 +73,41 @@
             border-radius: 5px;
             cursor: pointer;
             -webkit-app-region: no-drag;
+            margin: 5px;
+        }
+
+        .shortcut-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="app">
-        <div id="drag-area"></div>
+    <div id="app" class="fade-in">
+        <div id="drag-area">
+            <div id="close-button" onclick="hideWindow()">×</div>
+        </div>
         <div class="content">
             <h2>圆形悬浮窗</h2>
             <p>透明区域可点击穿透</p>
             <button onclick="alert('按钮被点击了！')">点击测试</button>
+            <div class="shortcut-hint">
+                快捷键：Option + Space
+            </div>
         </div>
     </div>
 
@@ -80,6 +124,11 @@
             }
         });
 
+        function hideWindow() {
+            win.hide();
+        }
+
+        // 初始设置鼠标事件穿透
         win.setIgnoreMouseEvents(true, { forward: true });
     </script>
 </body>
